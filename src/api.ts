@@ -2,10 +2,14 @@ import { Article } from "./types";
 
 const BASE_PATH = 'https://hacker-news.firebaseio.com/v0';
 
-const fetchData = async (path) => {
-  const response = await fetch(`${BASE_PATH}${path}`);
-  const data = await response.json();
-  return data;
+const fetchData = async (path: string) => {
+  try {
+    const response = await fetch(`${BASE_PATH}${path}`);
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    console.log('e:', e)
+  }
 };
 
 const createApi = () => {

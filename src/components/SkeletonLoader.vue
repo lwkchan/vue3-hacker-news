@@ -1,13 +1,13 @@
 <template>
-    <div class="skeleton-loader"></div>
+    <div class="skeletonLoader" data-testid="SkeletonLoader"></div>
 </template>
 <style>
-.skeleton-loader {
+.skeletonLoader {
     --height: 10rem;
 
     width: 100%;
     height: var(--height);
-    animation: skeleton-loader-shimmer 1s linear infinite forwards;
+    animation: skeletonLoaderShimmer 1s linear infinite forwards;
     background: #eee;
     background-image: linear-gradient(
         to right,
@@ -21,7 +21,7 @@
     border-radius: 3px;
 }
 
-@keyframes skeleton-loader-shimmer {
+@keyframes skeletonLoaderShimmer {
     0% {
         background-position: -100% 0;
     }
