@@ -12,15 +12,12 @@
     "vue": "^3.2.16"
   },
   "devDependencies": {
-    "@babel/preset-typescript": "^7.16.0",
     "@testing-library/vue": "^6.4.2",
     "@types/jest": "^27.0.3",
     "@vitejs/plugin-vue": "^1.9.3",
-    "jest": "^27.3.1",
-    "ts-jest": "^27.0.7",
+    "jest": "26",
+    "ts-jest": "26",
     "vite": "^2.6.4",
-    "vue-jest": "^5.0.0-0",
-    "vue-loader": "^16.8.3",
-    "vue-template-compiler": "^2.6.14"
+    "vue-jest": "^5.0.0-alpha.10"
   }
 }
