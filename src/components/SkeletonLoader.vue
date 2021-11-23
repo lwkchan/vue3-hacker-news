@@ -1,6 +1,14 @@
 <template>
-    <div class="skeletonLoader" data-testid="SkeletonLoader"></div>
+    <div class="skeletonLoader" data-testid="SkeletonLoader" :style="style"></div>
 </template>
+<script lang="ts">
+export default {
+    props: { height: Number },
+    setup(props: { height: number }) {
+        return { style: { ['--height']: `${props.height}px` as string } }
+    }
+}
+</script>
 <style>
 .skeletonLoader {
     --height: 10rem;

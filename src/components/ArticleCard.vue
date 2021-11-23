@@ -12,7 +12,7 @@ export default {
 <template>
     <div class="ArticleCard">
         <a :href="article.url">
-            <h1>{{ article.title }}</h1>
+            <h2>{{ article.title }}</h2>
         </a>
         <div class="ArticleCard__info">
             <p>Score: {{ article.score }}</p>
@@ -29,6 +29,15 @@ export default {
 .ArticleCard h1 {
     font-size: 2rem;
     display: inline;
+}
+
+.ArticleCard a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ArticleCard a:visited {
+    color: var(--colorFontSecondary);
 }
 .ArticleCard__info {
     display: grid;

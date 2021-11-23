@@ -3,43 +3,52 @@
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import { onMounted, ref } from 'vue';
 import createApi from './api';
-import SkeletonLoader from './components/SkeletonLoader.vue'
+import SkeletonLoader from './components/SkeletonLoader.vue';
 import ArticleCard from './components/ArticleCard.vue';
 
-const ARTICLES_COUNT = 30
+const ARTICLES_COUNT = 30;
 const LoadingState = {
   FETCHING: 'FETCHING',
-  READY: 'READY'
-}
+  READY: 'READY',
+};
 
 export default {
+  props: { height: Number },
   components: {
     SkeletonLoader,
-    ArticleCard
+    ArticleCard,
   },
   setup() {
-    const api = createApi()
-    const articles = ref([])
-    const currentLoadingState = ref(LoadingState.FETCHING)
+    const api = createApi();
+    const articles = ref([]);
+    const currentLoadingState = ref(LoadingState.FETCHING);
 
     onMounted(() => {
       api.getTopStories().then((articleIds) => {
-        articles.value = articleIds
-        currentLoadingState.value = LoadingState.READY
-      })
-    })
+        articles.value = articleIds;
+        currentLoadingState.value = LoadingState.READY;
+      });
+    });
 
-    return { articles, currentLoadingState, ARTICLES_COUNT, LoadingState }
+    return {
+      articles,
+      currentLoadingState,
+      ARTICLES_COUNT,
+      LoadingState,
+    };
   },
 };
 </script>
 
 <template>
   <div class="container">
-    <div v-if="currentLoadingState === LoadingState.FETCHING" class="gridList">
-      <SkeletonLoader v-for="index in ARTICLES_COUNT" :key="index" />
+    <div class="header">
+      <h1>Hacker news clone</h1>
     </div>
-    <ul role="list" class="gridList" v-else>
+    <div v-if="currentLoadingState === LoadingState.FETCHING" class="list">
+      <SkeletonLoader v-for="index in ARTICLES_COUNT" :key="index" :height="60" />
+    </div>
+    <ul role="list" class="list" v-else>
       <li v-for="article in articles">
         <ArticleCard :article="article" />
       </li>
@@ -51,11 +60,20 @@ export default {
 .container {
   max-width: 80rem;
   margin: 0 auto;
+  display: grid;
+  row-gap: 1rem;
 }
 
-.gridList {
+.list {
   display: grid;
   row-gap: 2rem;
+}
+
+.header {
+  display: flex;
+  background-color: var(--colorThemePrimary);
+  padding: 10px;
+  font-size: 1rem;
 }
 </style>
 
@@ -65,11 +83,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 html {
   font-size: 16px;
+  color: var(--colorFontPrimary);
 }
 </style>
