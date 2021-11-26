@@ -26,7 +26,7 @@ export default {
 .ArticleCard {
     text-align: left;
 }
-.ArticleCard h1 {
+.ArticleCard h2 {
     font-size: 2rem;
     display: inline;
 }
