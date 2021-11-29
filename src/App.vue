@@ -31,6 +31,13 @@
   padding: 10px;
   font-size: 1rem;
 }
+
+nav {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 1rem;
+  place-items: center;
+}
 </style>
 
 <style>
@@ -46,5 +53,10 @@
 html {
   font-size: 16px;
   color: var(--colorFontPrimary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 </style>
