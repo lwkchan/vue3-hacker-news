@@ -9,3 +9,8 @@ export interface Article {
     type: string;
     url: string;
 }
+
+export enum ArticlesPageType {
+    Top = 'topstories',
+    New = 'newstories'
+}

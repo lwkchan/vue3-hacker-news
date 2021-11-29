@@ -1,10 +1,10 @@
 <script lang="ts">
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import { onMounted, ref } from 'vue';
-import createApi from '../api';
 import SkeletonLoader from '../components/SkeletonLoader.vue';
 import ArticleCard from '../components/ArticleCard.vue';
-import { Article } from '../types';
+import { Article, ArticlesPageType } from '../types';
+import api from '../api';
 
 const ARTICLES_COUNT = 30;
 const LoadingState = {
@@ -12,19 +12,19 @@ const LoadingState = {
     READY: 'READY',
 };
 
+
 export default {
-    props: { type: String },
+    props: { type: ArticlesPageType },
     components: {
         SkeletonLoader,
         ArticleCard,
     },
     setup(props) {
-        const api = createApi();
         const articles = ref<Article[]>([]);
         const currentLoadingState = ref(LoadingState.FETCHING);
 
         onMounted(() => {
-            api.getTopStories().then((articleIds) => {
+            api.getStories(props.type).then((articleIds) => {
                 articles.value = articleIds;
                 currentLoadingState.value = LoadingState.READY;
             });
