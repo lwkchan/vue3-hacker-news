@@ -2,19 +2,23 @@ import { render, screen } from '@testing-library/vue';
 import fetchMock from 'jest-fetch-mock'
 import { getMockArticle, getMockArticleIds } from './api.mock';
 import App from './App.vue';
+import { router } from './router';
 import { Article } from './types';
 
 
-function renderApp() {
-    return render(App, {})
+async function renderApp() {
+    const app = render(App, { global: { plugins: [router] } })
+    await router.isReady()
+
+    return app
 }
 
 describe('App', () => {
 
 
-    it('displays the correct number of loading spinners on load', () => {
+    it('displays the correct number of loading spinners on load', async () => {
         fetchMock.mockResponse('[]')
-        renderApp()
+        await renderApp()
 
         const skeletonLoaders = screen.getAllByTestId("SkeletonLoader")
         expect(skeletonLoaders).toHaveLength(30)
@@ -38,8 +42,8 @@ describe('App', () => {
             })
         })
 
-        it('displays the articles', () => {
-            renderApp()
+        it('displays the articles', async () => {
+            await renderApp()
 
             articles.forEach((article) => {
                 screen.getByText(article.title)
